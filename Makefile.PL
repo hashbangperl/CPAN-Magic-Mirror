@@ -1,12 +1,20 @@
-use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-WriteMakefile(
-    NAME              => 'CPAN::MagicMirror',
-    VERSION_FROM      => 'lib/CPAN/MagicMirror.pm', # finds $VERSION
-    PREREQ_PM         => {
-			  CPANPLUS => 0,
-			 }, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-       (AUTHOR         => 'Aaron Trevena <teejay@cpan.org>') : ()),
-);
+#!/usr/bin/env perl
+# IMPORTANT: if you delete this file your app will not work as
+# expected.  You have been warned.
+use inc::Module::Install;
+
+name 'CPAN-MagicMirror';
+all_from 'lib/CPAN/MagicMirror.pm';
+
+requires 'Catalyst::Runtime' => '5.80022';
+requires 'Catalyst::Plugin::ConfigLoader';
+requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Action::RenderView';
+requires 'parent';
+requires 'Config::General'; # This should reflect the config file format you've chosen
+                 # See Catalyst::Plugin::ConfigLoader for supported formats
+catalyst;
+
+install_script glob('script/*.pl');
+auto_install;
+WriteAll;

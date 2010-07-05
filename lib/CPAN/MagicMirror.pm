@@ -16,6 +16,9 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
+  script/cpan_magicmirror_server.pl
+
+
 =head1 DESCRIPTION
 
 Magic Mirror is a "managed" mirror of CPAN, enabling you
@@ -24,25 +27,38 @@ modules to the mirror easily.
 
 =cut
 
-use CPANPLUS::Backend;
+use Catalyst::Runtime 5.80;
 
-my $cb      = CPANPLUS::Backend->new;
-my $conf    = $cb->configure_object;
+# Set flags and add plugins for the application
+#
+#         -Debug: activates the debug mode for very useful log messages
+#   ConfigLoader: will load the configuration from a Config::General file in the
+#                 application's home directory
+# Static::Simple: will serve static files from the application's root
+#                 directory
 
-my $author  = $cb->author_tree('KANE');
-my $mod     = $cb->module_tree('Some::Module');
-my $mod     = $cb->parse_module( module => 'Some::Module' );
+use parent qw/Catalyst/;
+use Catalyst qw/-Debug
+                ConfigLoader
+                Static::Simple/;
 
-my @objs    = $cb->search(  type    => TYPE,
-			    allow   => [...] );
+__PACKAGE__->config( name => 'CPAN::MagicMirror' );
 
+# Start the application
+__PACKAGE__->setup();
 
 
 
 =head1 SEE ALSO
 
-* CPAN::Mini
-* CPAN::Mini::Webserver
+=over 4
+
+=item L<CPAN::Mini>
+=item L<CPAN::Mini::Webserver>
+=item L<CPAN::MagicMirror::Controller::Root>
+=item L<Catalyst>
+
+=back
 
 =head1 AUTHOR
 
