@@ -10,6 +10,7 @@ create table module (
  module_is_bundle tinyint(1) default 0,
  module_requires_perl_version float(1,2) default 0.0,
  module_updated datetime,
+ module_checksum text,
  primary key (id)
 );
 
