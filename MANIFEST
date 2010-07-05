@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/CPAN-MagicMirror.t
+lib/CPAN/MagicMirror.pm

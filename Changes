@@ -1,0 +1,6 @@
+Revision history for Perl extension CPAN::MagicMirror.
+
+0.01  Mon Jul  5 20:19:15 2010
+	- original version; created by h2xs 1.23 with options
+		-X CPAN::MagicMirror
+
