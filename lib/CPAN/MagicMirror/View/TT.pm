@@ -1,36 +1,27 @@
-package CPAN::MagicMirror::Model::DB;
-use strict;
+package CPAN::MagicMirror::View::TT;
 
 =head1 NAME
 
-CPAN::MagicMirror::Model::DB`
+CPAN::MagicMirror::View::TT
 
 =head1 DESCRIPTION
 
-Model providing access to magic mirror DBIC schema
+Subclasses and configures Catalyst::View::TT to enable Template Toolkit view processing
 
 =head1 SYNOPSIS
 
-    my $schema = $c->model('DB'); # get dbic schema
-
-   my $authorss_rs = $c->model('DB::Author'); # get Resultset
+handled in by Catalyst::View, not used directly
 
 =cut
 
-use base 'Catalyst::Model::DBIC::Schema';
-
-__PACKAGE__->config(
-    schema_class => 'CPAN::MagicMirror::DB',
-);
-
+use strict;
+use base 'Catalyst::View::TT';
 
 =head1 SEE ALSO
 
 Catalyst
 
-Catalyst::Model::DBIC::Schema
-
-DBIx::Class
+Template
 
 =head1 AUTHOR
 
@@ -47,4 +38,3 @@ at your option, any later version of Perl 5 you may have available.
 =cut
 
 1;
-
