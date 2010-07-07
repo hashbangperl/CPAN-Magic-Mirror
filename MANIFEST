@@ -9,6 +9,16 @@ t/03podcoverage.t
 lib/CPAN/MagicMirror.pm
 lib/CPAN/MagicMirror/Controller/Root.pm
 lib/CPAN/MagicMirror/Model/CPANPLUS.pm
+lib/CPAN/MagicMirror/Model/DB.pm
+lib/CPAN/MagicMirror/View/TT.pm
+lib/CPAN/MagicMirror/DB.pm
+lib/CPAN/MagicMirror/DB/Result/Author.pm                   
+lib/CPAN/MagicMirror/DB/Result/CpanModuleWatchlist.pm  
+lib/CPAN/MagicMirror/DB/Result/Module.pm        
+lib/CPAN/MagicMirror/DB/Result/Tag.pm
+lib/CPAN/MagicMirror/DB/Result/CpanLatestModuleVersion.pm  
+lib/CPAN/MagicMirror/DB/Result/LocalModification.pm    
+lib/CPAN/MagicMirror/DB/Result/TaggedModule.pm
 script/cpan_magicmirror_cgi.pl
 script/cpan_magicmirror_create.pl
 script/cpan_magicmirror_fastcgi.pl
