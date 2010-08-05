@@ -17,6 +17,12 @@ handled in by Catalyst::View, not used directly
 use strict;
 use base 'Catalyst::View::TT';
 
+__PACKAGE__->config(
+                    INCLUDE_PATH => [
+                                     CPAN::MagicMirror->path_to( 'root', 'templates' ),
+                                    ],
+                   );
+
 =head1 SEE ALSO
 
 Catalyst
