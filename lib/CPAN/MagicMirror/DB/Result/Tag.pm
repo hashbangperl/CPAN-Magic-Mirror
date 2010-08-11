@@ -53,12 +53,36 @@ __PACKAGE__->add_columns(
   "created",
   { data_type => "datetime", is_nullable => 1 },
 );
+
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-07-06 19:50:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RYczrdrKsepQ2XH8JjvsuA
+=head2 module_tags
+
+Type: has_many
+
+Related object: L<WardrobeApp::Data::TaggedModule>
+
+=cut
+
+__PACKAGE__->has_many(
+  "module_tags",
+  "CPAN::MagicMirror::DB::Result::TaggedModule",
+  { "foreign.tag_id" => "self.id" },
+);
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+=head2 modules
+
+Many to many relation to modules
+
+=cut
+
+__PACKAGE__->many_to_many(
+			  modules => 'module_tags', 'module'
+			 );
+
+
+
 1;
