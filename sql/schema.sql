@@ -18,6 +18,7 @@ create table author (
  id integer not null auto_increment,
  author_name varchar(255) not null,
  author_pauseid varchar(64),
+ author_internalid varchar(100),
  author_email varchar(255),
  author_website varchar(255),
  primary key (id)
