@@ -1,19 +1,18 @@
 package CPAN::MagicMirror::DB::Result::Author;
-
-# Created by DBIx::Class::Schema::Loader
-# DO NOT MODIFY THE FIRST PART OF THIS FILE
-
 use strict;
 use warnings;
-
-use base 'DBIx::Class::Core';
-
 
 =head1 NAME
 
 CPAN::MagicMirror::DB::Result::Author
 
+=head1 DESCRIPTION
+
+A module author - a real person can have multiple module author entries, i.e. an internal one using work email, and a home/other CPAN author entry
+
 =cut
+
+use base 'DBIx::Class::Core';
 
 __PACKAGE__->table("author");
 
@@ -32,6 +31,12 @@ __PACKAGE__->table("author");
   size: 255
 
 =head2 author_pauseid
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 64
+
+=head2 author_internalid
 
   data_type: 'varchar'
   is_nullable: 1
@@ -63,12 +68,41 @@ __PACKAGE__->add_columns(
   "author_website",
   { data_type => "varchar", is_nullable => 1, size => 255 },
 );
+
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-07-06 19:50:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LqTj2d6O1CJMGEfB0cztkQ
+=head2 modules
+
+Type: has_many
+
+Related object: L<WardrobeApp::Data::Module>
+
+=cut
+
+__PACKAGE__->has_many(
+  "modules",
+  "CPAN::MagicMirror::DB::Result::Module",
+  { "foreign.author_id" => "self.id" },
+);
+
+=head2 METHODS
+
+=head2 dist_path
+
+Z/ZA/ZAG/
+
+=cut
+
+sub dist_path {
+    my $row = shift;
+    my $ident = $row->author_pauseid || $row->author_internalid;
+    my ($a, $b) = split('',$ident);
+    my $path = "$a/$a$b/$ident/";
+    return $path;
+}
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+
 1;
