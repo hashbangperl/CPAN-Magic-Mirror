@@ -42,7 +42,13 @@ use Catalyst qw/-Debug
                 ConfigLoader
                 Static::Simple/;
 
-__PACKAGE__->config( name => 'CPAN::MagicMirror' );
+__PACKAGE__->config(
+		    name => 'CPAN::MagicMirror',
+		    'default_view' => 'TT',
+		    'Model::DB' => {
+				    connect_info => [ 'dbi:mysql:dbname=magic_mirror', 'mirror_user', 'h3art0fap1g',  ]
+				   },
+		   );
 
 # Start the application
 __PACKAGE__->setup();
