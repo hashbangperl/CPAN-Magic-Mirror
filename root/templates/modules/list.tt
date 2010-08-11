@@ -1,0 +1,64 @@
+[% WRAPPER 'includes/layout.tt' title="list of modules" %]
+
+[% IF message %]
+<p><i>[% message %]</i></p>
+[% END %]
+
+<table>
+<tr>
+  <th> Name </th>
+  <th> Author</th>
+  <th> Current Version </th>
+  <th> Latest Version on CPAN </th>
+  <th> Download </th>
+  <th> Has local modifications </th>
+  <th> Tags </th>
+  <th> Status </th>
+</tr>
+[% FOREACH module IN module_list %]
+[% SET author = module.author %]
+<tr>
+  <td> <a href="/modules/[% module.id %]/view">[% module.module_name %]</a> </td>
+  <td> <a href="/authors/[% module.author_id %]/view">[% author.author_name %]</a> </td>
+  <td> [% module.module_version %]</td>
+  <td> xxxxx </td>
+  <td> <a href="/modules/dist/[% author.dist_path  %][% module.dist_filename %]">[% author.dist_path  %][% module.dist_filename %]</a></td>
+  <td> [% IF module.module_derived_from %] yes : <a href="/modules/[% module.module_derived_from %]/view">original</a> [% ELSE %] None [% END %]</td>
+  <td> [% FOREACH tag IN module.tags %] [% tag.tag_name %] [% END %]</td>
+  <td> xxxxx </td>
+</tr>
+[% END %]
+<tr>
+<td colspan="7">
+<p class="search">
+<form name="search" action="/modules/search" method="post">
+<label>Search</label><input type="text" name="keywords">
+<input type="submit" value="Find">
+</form>
+</p>
+<p class="pager">Pages:
+[%   
+    SET begin_page = pager.current_page - 10;
+    IF begin_page < 1;
+        SET begin_page = pager.first_page;
+    END;
+    SET end_page = pager.current_page + 10;
+    IF pager.last_page < end_page;
+        SET end_page = pager.last_page;
+    END;
+     FOREACH num = [begin_page .. end_page];
+          IF num == pager.current_page;
+            "<span class='current-page'>"; num; "</span>";
+          ELSE;
+%]
+	    <span class='page'><a href="/modules/search?page=[% num %]&keywords=[% c.request.parameters.keywords | uri %]"> [% num %] </a></span>;
+[% 
+       END;
+     END;
+%]
+</p>
+</td>
+</tr>
+</table>
+
+[% END %]
