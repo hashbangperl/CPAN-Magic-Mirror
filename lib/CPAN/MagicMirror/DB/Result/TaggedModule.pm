@@ -51,12 +51,23 @@ __PACKAGE__->add_columns(
   "tag_updated",
   { data_type => "datetime", is_nullable => 1 },
 );
+
 __PACKAGE__->set_primary_key("module_id", "tag_id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-07-06 19:50:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:80EanT4zQ+ThGJTea1uxwA
+__PACKAGE__->belongs_to(
+  "module" => "CPAN::MagicMirror::DB::Result::Module",
+    { id => "module_id" },
+    );
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->belongs_to(
+  "tag" => "CPAN::MagicMirror::DB::Result::Tag",
+    { id => "tag_id" },
+    );
+
+
+
+
+
 1;
