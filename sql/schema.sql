@@ -14,6 +14,15 @@ create table module (
  primary key (id)
 );
 
+create table module_dependancies (
+  module_id integer not null,
+  dependancy_id integer not null,
+  dependancy_is_optional tinyint(1),
+  dependancy_is_for_build tinyint(1),
+  dependancy_is_for_test tinyint(1),
+  primary key ( module_id, dependancy_id)
+);
+
 create table author (
  id integer not null auto_increment,
  author_name varchar(255) not null,
@@ -64,5 +73,20 @@ create table local_modifications (
    modification_author varchar(128),
    primary key (id),
    key module_file (module_id, filename)
+);
+
+create table release_category (
+   id integer not null auto_increment,
+   category_name varchar(127),
+   category_description text,
+   category_created datetime,
+   category_updated datetime,
+   primary key (id)
+);
+
+create table category_modules (
+  module_id integer not null,
+  category_id integer not null,
+  primary key (module_id, category_id)
 );
 
