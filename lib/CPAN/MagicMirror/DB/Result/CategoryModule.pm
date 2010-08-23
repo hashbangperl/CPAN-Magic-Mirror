@@ -1,13 +1,8 @@
 package CPAN::MagicMirror::DB::Result::CategoryModule;
-
-# Created by DBIx::Class::Schema::Loader
-# DO NOT MODIFY THE FIRST PART OF THIS FILE
-
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Core';
-
 
 =head1 NAME
 
@@ -39,10 +34,11 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("module_id", "category_id");
 
+"tag" => "CPAN::MagicMirror::DB::Result::Tag",    { id => "tag_id" },
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-08-11 18:48:18
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:w7UjmNkTROtYp5t6NGk0qw
+__PACKAGE__->belongs_to("CPAN::MagicMirror::DB::Result::Module", { id => 'module_id' });
+__PACKAGE__->belongs_to("CPAN::MagicMirror::DB::Result::ReleaseCategory", { id => 'category_id' });
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+
 1;
