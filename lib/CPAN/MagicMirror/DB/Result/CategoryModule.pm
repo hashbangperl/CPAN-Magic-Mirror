@@ -52,7 +52,6 @@ Related object: L<CPAN::MagicMirror::DB::Result::ReleaseCategory>
 
 =cut
 
-
 __PACKAGE__->belongs_to(module => "CPAN::MagicMirror::DB::Result::Module", { id => 'module_id' });
 __PACKAGE__->belongs_to(category => "CPAN::MagicMirror::DB::Result::ReleaseCategory", { id => 'category_id' });
 
