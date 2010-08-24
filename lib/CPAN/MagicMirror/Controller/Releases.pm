@@ -52,6 +52,7 @@ sub list : Local {
     return;
 }
 
+my $module_file_path = 'modules';
 # /releases/categoryname/authors/id/G/GB/GBARR/CPAN-DistnameInfo-0.02.tar.gz
 sub dist :Chained('by_name') :PathPart('authors/id') :Args(4) {
     my ($self, $c, $a, $b, $author_ident, $filename ) = @_;
