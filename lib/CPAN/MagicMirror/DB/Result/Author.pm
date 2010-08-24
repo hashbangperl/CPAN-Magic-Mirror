@@ -77,7 +77,7 @@ __PACKAGE__->set_primary_key("id");
 
 Type: has_many
 
-Related object: L<WardrobeApp::Data::Module>
+Related object: L<CPAN::MagicMirror::DB::Result::Module>
 
 =cut
 
