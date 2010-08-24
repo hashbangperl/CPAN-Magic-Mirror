@@ -139,6 +139,33 @@ __PACKAGE__->many_to_many(
 			 );
 
 
+=head2 module_categories
+
+Type: has_many
+
+Related object: L<CPAN::MagicMirror::DB::Result::CategoryModule>
+
+=cut
+
+__PACKAGE__->has_many(
+  "module_categories",
+  "CPAN::MagicMirror::DB::Result::CategoryModule",
+  { "foreign.module_id" => "self.id" },
+);
+
+
+=head2 modules
+
+Many to many relation to modules
+
+=cut
+
+__PACKAGE__->many_to_many(
+			  categories => 'module_categories', 'category'
+			 );
+
+
+
 =head1 METHODS
 
 =head2 dist_filename
