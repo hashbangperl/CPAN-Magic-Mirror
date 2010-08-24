@@ -22,7 +22,7 @@
   <td> <a href="/authors/[% module.author_id %]/view">[% author.author_name %]</a> </td>
   <td> [% module.module_version %]</td>
   <td> xxxxx </td>
-  <td> <a href="/modules/dist/[% author.dist_path  %][% module.dist_filename %]">[% author.dist_path  %][% module.dist_filename %]</a></td>
+  <td> <a href="/releases/categoryname/authors/id/[% author.dist_path  %][% module.dist_filename %]">[% author.dist_path  %][% module.dist_filename %]</a></td>
   <td> [% IF module.module_derived_from %] yes : <a href="/modules/[% module.module_derived_from %]/view">original</a> [% ELSE %] None [% END %]</td>
   <td> [% FOREACH tag IN module.tags %] [% tag.tag_name %] [% END %]</td>
   <td> xxxxx </td>
