@@ -60,12 +60,36 @@ __PACKAGE__->add_columns(
   "category_updated",
   { data_type => "datetime", is_nullable => 1 },
 );
+
 __PACKAGE__->set_primary_key("id");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-08-11 18:48:18
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QvnKkW+WD6rRgdPIOffwkQ
+=head2 category_modules
+
+Type: has_many
+
+Related object: L<CPAN::MagicMirror::DB::Result::CategoryModule>
+
+=cut
+
+__PACKAGE__->has_many(
+  "category_modules",
+  "CPAN::MagicMirror::DB::Result::CategoryModule",
+  { "foreign.category_id" => "self.id" },
+);
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+=head2 modules
+
+Many to many relation to modules
+
+=cut
+
+__PACKAGE__->many_to_many(
+			  modules => 'category_modules', 'module'
+			 );
+
+
+
 1;
