@@ -34,8 +34,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("module_id", "category_id");
 
-"tag" => "CPAN::MagicMirror::DB::Result::Tag",    { id => "tag_id" },
-
 =head1 RELATIONS
 
 =head2 module
