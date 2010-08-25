@@ -154,9 +154,9 @@ __PACKAGE__->has_many(
 );
 
 
-=head2 modules
+=head2 categories
 
-Many to many relation to modules
+Many to many relation to categories
 
 =cut
 
