@@ -60,7 +60,14 @@ sub dist :Chained('by_name') :PathPart('authors/id') :Args(4) {
     my $d = CPAN::DistnameInfo->new($filename);
     (my $module_name = $d->dist) =~ s|\-|::|g;
     my $module_version   = $d->version;   # "0.02"
-    my $module = $c->model('DB::Module')->search ({ module_name => $module_name, module_version => $module_version }, {join => {releases => $release->id}});
+    my ($module) = $c->model('DB::Module')->search ({ module_name => $module_name, module_version => $module_version, category_id => $release->id }, {join => 'module_categories'});
+
+    unless ($module) {
+	warn "no module for $module_name for release " . $release->category_name;
+	$c->forward('/default');
+	return;
+    }
+
     my $download_filepath = $module_file_path . '/' . $module->id . '/' . $filename ;
 
     # set content type
@@ -74,8 +81,18 @@ sub dist :Chained('by_name') :PathPart('authors/id') :Args(4) {
 sub by_name : PathPart('releases') :Chained('/') :CaptureArgs(1) {
     my ($self, $c, $name) = @_;
 
-    my ($this_release) = $c->model('DB::CategoryRelease')->search({category_name => $name} );
+    my ($this_release) = $c->model('DB::ReleaseCategory')->search({category_name => $name} );
+
+    unless ($this_release) {
+	warn "no release matching name $name\n";
+	$c->forward('/default');
+	$c->detach();
+	return 0;
+    }
+
     $c->stash->{this_release} = $this_release;
+
+
 
     return;
     
