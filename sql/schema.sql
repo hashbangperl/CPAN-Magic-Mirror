@@ -90,3 +90,19 @@ create table category_modules (
   primary key (module_id, category_id)
 );
 
+create table upstream_repo (
+  id integer not null auto_increment,
+  repo_name varchar(255) not null,
+  repo_url varchar(512) not null,
+  repo_type_id int not null,
+  primary key (id)
+);
+
+
+create table repo_type  (
+  id integer not null auto_increment,
+  type_name varchar(128),
+  type_description text,
+  type_handler_name varchar(255),
+  primary key (id)
+);
